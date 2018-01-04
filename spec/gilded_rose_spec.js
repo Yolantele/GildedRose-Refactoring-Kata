@@ -1,16 +1,10 @@
-describe("Gilded Rose", function() {
+describe('Gilded Rose', () => {
 
-  var item;
-  var shop;
+  describe('Item', () => {
 
-  describe('Item', function(){
-
-    beforeEach(function(){
-      item = new Item('name', 10, 50);
-    });
-
-    describe('#constructor', function(){
-      it('sets the parameters name, sellIn and quality upon initalization', function() {
+    describe('#constructor', () => {
+      const item = new Item ('name', 10, 50)
+      it('sets the parameters name, sellIn and quality upon initalization', () => {
         expect(item.name).toEqual('name');
         expect(item.sellIn).toEqual(10);
         expect(item.quality).toEqual(50);
@@ -18,33 +12,53 @@ describe("Gilded Rose", function() {
     });
   });
 
-  describe('Shop', function(){
-
-    beforeEach(function(){
-      shop = new Shop([]);
-    });
-
-    describe('#constructor', function(){
-      it('sets the empty items array uppon initialization', function() {
+  describe('Shop', () => {
+    describe('#constructor', () => {
+      it('sets the empty items array uppon initialization', () => {
+        const shop = new Shop([]);
         expect(shop.items).toEqual([]);
       });
     });
 
-    describe('#updateQuantity', function(){
-      it('', function() {
-        expect().toEqual();
+    describe('#updateQuality for ', () => {
+
+      it('regular list item', () => {
+        const gildedRose = new Shop([new Item('foo', 10, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(4);
+      });
+      it('brie quality increase to the maximum', () => {
+        const gildedRose = new Shop([new Item('brie', 10, 5), new Item('brie', 10, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(4);
+        expect(items[1].quality).toEqual(0);
+
+      });
+
+      it('backstage 10 days left quality increase x2 ', () => {
+        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(7);
+      });
+      it('backstage 5 days left quality increase x3', () => {
+        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(8);
+      });
+      it('backstage after sell in quality drops to 0 ', () => {
+        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 5)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(0);
       });
     });
   });
-
-
 });
 
 //_____ templates _____
 
 
-// describe('', function(){
-//   it('', function() {
+// describe('', (){
+//   it('', () {
 //     expect().toEqual();
 //   });
 // });
