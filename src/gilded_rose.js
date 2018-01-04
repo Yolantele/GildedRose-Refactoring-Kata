@@ -1,3 +1,12 @@
+// increase Q - brie,  up  till 50q reached
+//            - backstage - Q up by x2 when 10 days till sellIn,
+//                        - x3 when 5 days,
+//                        - x0 after sellIn
+// decrease Q -
+// stay Q - sulfuras
+// can make UpdateQulity as a static  of Item class, otherwise, don't change.
+
+
 class Item {
   constructor(name, sellIn, quality){
     this.name = name;
@@ -12,7 +21,9 @@ class Shop {
   }
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
+
+      // decrease Q when :
+      if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert')   {
         if (this.items[i].quality > 0) {
           if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
             this.items[i].quality = this.items[i].quality - 1;
@@ -35,6 +46,9 @@ class Shop {
           }
         }
       }
+
+
+      // stay the same Q
       if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }

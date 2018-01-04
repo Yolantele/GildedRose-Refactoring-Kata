@@ -6,14 +6,14 @@ describe("Gilded Rose", function() {
   describe('Item', function(){
 
     beforeEach(function(){
-      item = new Item('name', 0, 0);
+      item = new Item('name', 10, 50);
     });
 
     describe('#constructor', function(){
       it('sets the parameters name, sellIn and quality upon initalization', function() {
         expect(item.name).toEqual('name');
-        expect(item.sellIn).toEqual(0);
-        expect(item.quality).toEqual(0);
+        expect(item.sellIn).toEqual(10);
+        expect(item.quality).toEqual(50);
       });
     });
   });
@@ -26,10 +26,25 @@ describe("Gilded Rose", function() {
 
     describe('#constructor', function(){
       it('sets the empty items array uppon initialization', function() {
-        expect(shop.items).toEqual([])
+        expect(shop.items).toEqual([]);
+      });
+    });
+
+    describe('#updateQuantity', function(){
+      it('', function() {
+        expect().toEqual();
       });
     });
   });
 
 
 });
+
+//_____ templates _____
+
+
+// describe('', function(){
+//   it('', function() {
+//     expect().toEqual();
+//   });
+// });
