@@ -19,6 +19,7 @@ class Shop {
       const backPass = 'Backstage passes to a TAFKAL80ETC concert';
       const sulfuras = 'Sulfuras, Hand of Ragnaros';
 
+    if (item.quality < 50) {
       // decrease Q when :
       if (item.name !== 'Aged Brie' && item.name !== backPass) {
         if (item.quality > 0) {
@@ -27,7 +28,6 @@ class Shop {
           }
         }
       } else {
-        if (item.quality < 50) {
           item.quality += 1;
           if (item.name === backPass) {
             if (item.sellIn < 11) {
@@ -41,9 +41,7 @@ class Shop {
               }
             }
           }
-        }
       }
-      // stay the same Q
       if (item.name !== sulfuras) {
         item.sellIn -= 1;
       }
@@ -59,12 +57,12 @@ class Shop {
             item.quality = 0;
           }
         } else {
-          if (item.quality < 50) {
             item.quality += 1;
-          }
         }
       }
     }
     return this.items;
+  }
+
   }
 }
