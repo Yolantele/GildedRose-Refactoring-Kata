@@ -1,9 +1,7 @@
 describe('Gilded Rose', () => {
-
   describe('Item', () => {
-
     describe('#constructor', () => {
-      const item = new Item ('name', 10, 50)
+      const item = new Item ('name', 10, 50);
       it('sets the parameters name, sellIn and quality upon initalization', () => {
         expect(item.name).toEqual('name');
         expect(item.sellIn).toEqual(10);
@@ -21,7 +19,6 @@ describe('Gilded Rose', () => {
     });
 
     describe('#updateQuality for ', () => {
-
       describe('Q decreasing: ', () => {
         it('regular list item', () => {
           const gildedRose = new Shop([new Item('foo', 10, 5)]);
@@ -62,16 +59,6 @@ describe('Gilded Rose', () => {
           expect(items[0].quality).toEqual(5);
         });
       });
-
     });
   });
 });
-
-//_____ templates _____
-
-
-// describe('', () => {
-//   it('', () => {
-//     expect().toEqual();
-//   });
-// });
