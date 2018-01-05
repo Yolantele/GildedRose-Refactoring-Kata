@@ -59,6 +59,12 @@ describe('Gilded Rose', () => {
           expect(items[0].quality).toEqual(5);
         });
       });
+      describe('is regular returns correct boolean', () => {
+        it('returns true for normal items, and false for special condition items', () => {
+          const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', -5, 5), new Item('Backstage passes to a TAFKAL80ETC concert', 0, 5), new Item('foo', 10, 5) ] );
+          expect(gildedRose.isRegular('Sulfuras, Hand of Ragnaros')).toEqual(false)
+        });
+      });
     });
   });
 });
