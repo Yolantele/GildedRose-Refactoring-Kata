@@ -22,34 +22,47 @@ describe('Gilded Rose', () => {
 
     describe('#updateQuality for ', () => {
 
-      it('regular list item', () => {
-        const gildedRose = new Shop([new Item('foo', 10, 5)]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(4);
-      });
-      it('brie quality increase to the maximum', () => {
-        const gildedRose = new Shop([new Item('brie', 10, 5), new Item('brie', 10, 0)]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(4);
-        expect(items[1].quality).toEqual(0);
-
+      describe('Q decreasing: ', () => {
+        it('regular list item', () => {
+          const gildedRose = new Shop([new Item('foo', 10, 5)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(4);
+        });
       });
 
-      it('backstage 10 days left quality increase x2 ', () => {
-        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 5)]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(7);
+      describe('Q increasing under conditions: ', () => {
+        it('brie quality increase to the maximum', () => {
+          const gildedRose = new Shop([new Item('brie', 10, 5), new Item('brie', 10, 0)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(4);
+          expect(items[1].quality).toEqual(0);
+        });
+
+        it('backstage 10 days left quality increase x2 ', () => {
+          const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 5)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(7);
+        });
+        it('backstage 5 days left quality increase x3', () => {
+          const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 5)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(8);
+        });
+        it('backstage after sell in quality drops to 0 ', () => {
+          const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 5)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(0);
+        });
       });
-      it('backstage 5 days left quality increase x3', () => {
-        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 5)]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(8);
+
+      describe('Q stays the same', () => {
+        it('Sulfuras keeps the quality regardless of sell in date', () => {
+          const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', -5, 5)]);
+          const items = gildedRose.updateQuality();
+          expect(items[0].quality).toEqual(5);
+        });
       });
-      it('backstage after sell in quality drops to 0 ', () => {
-        const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 5)]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(0);
-      });
+
     });
   });
 });
@@ -57,8 +70,8 @@ describe('Gilded Rose', () => {
 //_____ templates _____
 
 
-// describe('', (){
-//   it('', () {
+// describe('', () => {
+//   it('', () => {
 //     expect().toEqual();
 //   });
 // });
