@@ -37,24 +37,23 @@ class Shop {
 
       if (item.quality < 50 && item.quality > 0) {
         // if(this.isRegular(item.name)){
-
-        if (item.name !== brie && item.name !== backPass) {
-          if (item.name !== sulfuras) {
-            item.quality -= 1;
-          }
-        } else {
-          if (item.name === backPass && item.sellIn < 11) {
-            item.quality += 1;
-          }
-          if (item.name === backPass && item.sellIn < 6) {
-            item.quality += 1;
-          }
-          if (item.name !== sulfuras) {
-            item.sellIn -= 1;
-          }
+        if(this.isRegular(item.name)) {
+          item.quality -= 1;
+          item.sellIn -= 1;
+        }
+        if (item.name === backPass && item.sellIn < 11) {
+          item.quality += 1;
+          item.sellIn -= 1;
+        }
+        if (item.name === backPass && item.sellIn < 6) {
           item.quality += 1;
         }
-
+        if (item.name === sulfuras) {
+          item.sellIn -= 1;
+        }
+        if (item.name === backPass) {
+          item.quality += 1;
+        }
         if (item.sellIn < 0) {
           if (item.name === brie) {
             item.quality += 1;
