@@ -56,12 +56,10 @@ class Shop {
         }
 
         if (item.sellIn < 0) {
-          if (item.name === brie && item.quality < 50) {
+          if (item.name === brie) {
             item.quality += 1;
           }
-          if (item.name === sulfuras) {
-            item.quality = item.quality;
-          } else {
+          if (item.name !== sulfuras) {
             item.quality = 0;
           }
         }
