@@ -29,15 +29,14 @@ class Shop {
       const item = this.items[i];
       const backPass = 'Backstage passes to a TAFKAL80ETC concert';
       const sulfuras = 'Sulfuras, Hand of Ragnaros';
+      const brie = 'Aged Brie';
 
-      if (item.quality < 50) {
+      if (item.quality < 50 && item.quality > 0) {
       // regurlar item decrease decrease Q when :
-        if (item.name !== 'Aged Brie' && item.name !== backPass) {
-          if (item.quality > 0) {
+        if (item.name !== brie && item.name !== backPass) {
             if (item.name !== sulfuras) {
               item.quality -= 1;
             }
-          }
         } else {
           item.quality += 1;
           if (item.name === backPass) {
@@ -57,7 +56,7 @@ class Shop {
           item.sellIn -= 1;
         }
         if (item.sellIn < 0) {
-          if (item.name !== 'Aged Brie') {
+          if (item.name !== brie ) {
             if (item.name !== backPass) {
               if (item.quality > 0) {
                 if (item.name !== sulfuras) {
