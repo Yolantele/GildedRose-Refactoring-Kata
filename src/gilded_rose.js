@@ -16,40 +16,45 @@ class Shop {
     this.items = items;
   }
 
-
   isRegular(name) {
     switch (name) {
       case backPass:
       case brie:
       case sulfuras:
-        return false;
-        break;
+      return false;
+      break;
       default:
-        return true;
+      return true;
+    }
+  }
+  updateRegular(item){
+    item.quality -= 1;
+    item.sellIn -= 1;
+  }
+
+  updateBackPass(item) {
+    item.sellIn -= 1;
+    if (item.sellIn > 11) {
+      item.quality += 1;
+    } if (item.sellIn < 11 && item.sellIn >= 6 ) {
+      item.quality += 2;
+    } if (item.sellIn < 6) {
+      item.quality += 3;
+    } if (item.sellIn < 0) {
+      item.quality = 0;
     }
   }
 
   updateQuality() {
-    var  that = this
-    for (var i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
+    var that = this;
+    this.items.forEach(item => {
       if (item.quality < 50 && item.quality > 0) {
-
-        if (this.isRegular(item.name)) {
-          item.quality -= 1;
-          item.sellIn -= 1;
+        if (that.isRegular(item.name)) {
+          that.updateRegular(item);
         }
-
         if (item.name === backPass) {
-          if (item.sellIn < 11) {
-            item.quality += 1;
-          } if (item.sellIn < 6) {
-            item.quality += 1;
-          }
-          item.quality += 1;
-          item.sellIn -= 1;
+          that.updateBackPass(item);
         }
-      
         if (item.sellIn < 0) {
           if (item.name === brie) {
             item.quality += 1;
@@ -58,7 +63,7 @@ class Shop {
           }
         }
       }
-      return this.items;
-    }
+    })
+    return this.items;
   }
 }
