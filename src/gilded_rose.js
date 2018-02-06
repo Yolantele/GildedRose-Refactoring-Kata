@@ -29,26 +29,26 @@ class Shop {
       return true;
     }
   }
-  isWithinQualityRange(item){
+  isWithinQualityRange(item = new Item){
     if (item.quality < MAX && item.quality > MIN) {
       return true;
     }
   }
-  updateRegular(item){
+  updateRegular(item = new Item){
     item.quality -= 1;
     item.sellIn -= 1;
   }
-  updateBackPass(item) {
+  updateBackPass(item = new Item) {
     item.sellIn -= 1;
     if (item.sellIn > 11) {item.quality += 1;}
     if (item.sellIn < 11 && item.sellIn >= 6 ) {item.quality += 2;}
     if (item.sellIn < 6) {item.quality += 3;}
     if (item.sellIn < 0) {item.quality = 0;}
   }
-  updateBrie(item){
+  updateBrie(item = new Item){
     item.quality += 1;
   }
-  updatePostExpiry(item) {
+  updatePostExpiry(item = new Item) {
     if (item.name !== sulfuras) {item.quality = 0;}
   }
 
